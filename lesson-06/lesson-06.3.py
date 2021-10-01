@@ -1,11 +1,18 @@
 mes1 = input()
 mes2 = input()
 mes3 = input()
-if len(mes1) > len(mes2) and len(mes1) > len(mes3):
-    print(mes1)
-elif len(mes2) > len(mes3):
-    print(mes2)
-elif len(mes3) > len(mes2):
-    print(mes3)
-elif len(mes1) == len(mes2) and len(mes1) == len(mes3):
-    print('Все статьи одинаковы по длине')
+len_max = mes1
+num_max = len(mes1)
+
+if num_max < len(mes2):
+    len_max = mes2
+    num_max = len(mes2)
+elif num_max == len(mes2):
+    len_max += ', ' +  mes2
+if num_max < len(mes3):
+    len_max = mes3
+    num_max = len(mes3)
+elif num_max == len(mes3):
+    len_max += ', ' + mes3
+
+print(len_max)
