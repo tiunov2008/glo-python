@@ -1,8 +1,7 @@
-email = input()
-if '.' in email:
-    if '@' in email:
-        print('Корректный')
-    else:
-        print('Некорректный')
-else:
-    print('Некорректный')
+n = int(input())
+flag = 'NO'
+for i in range(n):
+    num = int(input())
+    if num % 2 != 0:
+        flag = 'YES'
+print(flag)
