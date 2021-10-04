@@ -6,4 +6,7 @@ while n != 0:
     total_num += n
     if n != 0:
         total_symbols += 1
-print(total_num / total_symbols)
+if total_num != 0:
+    print(total_num / total_symbols)
+else:
+    print('Ошибка')
