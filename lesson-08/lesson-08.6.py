@@ -1,26 +1,9 @@
-num = int(input())
-if num < 0 or num >= 36:
-    print('Ошибка')
-elif num == 0 :
-    print('Зеленый')
-elif num >= 1 and num <= 10:
-    if num % 2 == 0:
-        print('Черный')
-    else:
-        print('Красный')
-
-elif num >= 11 and num <= 18:
-    if num % 2 == 0:
-        print('Красный')
-    else:
-        print('Черный')
-elif num >= 19 and num <= 28:
-    if num % 2 == 0:
-        print('Черный')
-    else:
-        print('Красный')
-elif num >= 29 and num <= 36:
-    if num % 2 == 0:
-        print('Красный')
-    else:
-        print('Черный')
+total_num = 0
+total_symbols = 0
+n = 1
+while n != 0:
+    n = int(input())
+    total_num += n
+    if n != 0:
+        total_symbols += 1
+print(total_num / total_symbols)
