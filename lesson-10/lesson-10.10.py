@@ -1,2 +1,5 @@
-a = str(input())
-print(a.replace('  ', ' ').count(' '))
+a = input().strip()
+if a != '':
+    print(a.count(' ') + 1)
+else:
+    print('Ошибка')

@@ -1,5 +1,5 @@
-n = str(input())
-if (ord(n) >= 97 and ord(n) <= 122) or (ord(n) >= 65 and ord(n) <= 90):
+n = input()
+if (ord(n) >= ord('a') and ord(n) <= ord('z')) or (ord(n) >= ord('A') and ord(n) <= ord('Z')):
     print(n.swapcase())
 else:
     print(n)

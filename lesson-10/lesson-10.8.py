@@ -1,4 +1,4 @@
-a = str(input())
+a = input()
 last_char = ''
 counter = 0
 for i in a:

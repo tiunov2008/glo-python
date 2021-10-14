@@ -1,5 +1,5 @@
-n = str(input())
-if ord(n) >= 1040 and ord(n) <= 1071:
+n = input()
+if ord(n) >= ord('А') and ord(n) <= ord('Я'):
     print('YES')
 else:
     print('NO')

@@ -1,6 +1,6 @@
-a = str(input())
-b = str(input())
-if ord(a) >= 97 and ord(a) <= 122 and ord(b) >= 97 and ord(b) <= 122:
+a = input()
+b = input()
+if ord(a) >= ord('a') and ord(a) <= ord('z') and ord(b) >= ord('a') and ord(b) <= ord('z'):
     for i in range(min(ord(a), ord(b)), max(ord(a), ord(b))+1):
         print(chr(i))
 else:

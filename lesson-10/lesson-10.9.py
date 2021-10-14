@@ -1,4 +1,4 @@
-a = str(input())
+a = input()
 print(len(a))
 print(a[-1])
 print(a[0:2])
