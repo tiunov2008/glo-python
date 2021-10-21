@@ -28,7 +28,7 @@ def ask_question(question, digit):
             return False
         else:
             print('Что-то пошло не так')
-            ask_question(question, False)
+            return ask_question(question, False)
 def start():
     
     print('Привет. Я генератор паролей. Я задам пару уточняющих вопросов, на основе которых сгенерирую пароль. Давай начнем')
@@ -55,8 +55,11 @@ def start():
         enabled_chars += russian_uppercase_letters
     if ask_question('Включать ли знаки пунктуации?', False):
         enabled_chars += punctuation
-    for i in range(pass_amount):
-        print(generate_password(length, enabled_chars))
+    if enabled_chars == '':
+        print('Вы не выбрали не одного варианта')
+    else:
+        for i in range(pass_amount):
+            print(generate_password(length, enabled_chars))
     if ask_question('Сгенерировать еще?', False):
         start()
 start()
