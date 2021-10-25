@@ -41,14 +41,12 @@ while True:
     if len(user_word) != len(secret_word) or not user_word.isdigit():
         print('Введите 4 числа без пробелов')
         continue
-    flag = 'Yes'
-    for a in range(len(user_word)):
-        for b in range(len(user_word)):
-            if user_word[a] == user_word[b] and a != b:
-                flag = 'No'
-                break
-        break
-    if flag == 'No':
+    flag = False
+    for i in range(len(user_word)):
+        if user_word.count(user_word[i]) > 1:
+            flag = True
+            break
+    if flag:
         print('Числа не должны повторяться')
         continue
     bulls_count = calculate_bulls_count(user_word, secret_word)
