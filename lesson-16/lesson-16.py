@@ -56,7 +56,7 @@ def start_game():
 
     while not win(field):
         print_field(field)
-        print('Ввидите номер строки и номер столбца')
+        print('Введите номер строки и номер столбца')
         row = int(input())
         column = int(input())
         if not(row >= 1 and row <= 3) or not(column >= 1 and column <= 3):
