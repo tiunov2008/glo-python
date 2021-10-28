@@ -19,11 +19,12 @@ def start_test():
         'Укол делают каждые полчаса, сколько нужно минут для трех уколов?',
         'Пять свечей горело две потухли. Сколько свечей осталось?'
     ]
+    answers = [6, 9, 25, 60, 2]
     count_right_answers = 0
     print('Как вас зовут?')
     name = input()
     for i in range(len(questions)):
-        question_index = random.randint(0,len(questions)- 1)
+        question_index = random.randint(0,len(questions) - 1)
         print('№', i + 1, questions[question_index])
 
         user_answer = input()
@@ -33,12 +34,12 @@ def start_test():
         if user_answer == right_answer:
             count_right_answers += 1
         questions.pop(question_index)
+        answers.pop(question_index)
     print('Количество правильных ответов', name, '=', count_right_answers)
     print(name, results[count_right_answers])
     if ask_question('Хотите пройти тест еще раз?'):
         start_test()
-#Создание списков    
-answers = [6, 9, 25, 60, 2]
+
 
 results = ['Идиот','Кретин','Дурак','Нормальный','Талант','Гений']
 #Запуск теста
