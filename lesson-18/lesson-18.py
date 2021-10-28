@@ -23,11 +23,12 @@ def start_test():
     print('Как вас зовут?')
     name = input()
     for i in range(len(questions)):
-        question_index = random.randint(0,len(questions))
-        print('№', (i + 1), questions[question_index])
+        question_index = random.randint(0,len(questions)- 1)
+        print('№', i + 1, questions[question_index])
 
-        user_answer = int(input())
-
+        user_answer = input()
+        if user_answer.isdigit():
+            user_answer = int(user_answer)
         right_answer = answers[question_index]
         if user_answer == right_answer:
             count_right_answers += 1
