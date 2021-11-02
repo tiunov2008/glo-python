@@ -2,11 +2,11 @@ import random
 import math
 #Функция для храннения данных
 def save_db(name, count_right_answers, result):
-    file = open('lesson-19/db.txt', 'a')
+    file = open('./db.txt', 'a')
     file.write(f'{name:20} {str(count_right_answers):25} {str(result):12}\n')
     file.close()
 def get_db():
-    file = open('lesson-19/db.txt', 'r')
+    file = open('./db.txt', 'r')
     results = file.readlines()
     print(f'{"Имя":20} Кол-во правильных ответов {"Результат":12}')
     for i in results:
