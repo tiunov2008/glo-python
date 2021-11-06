@@ -5,7 +5,7 @@ def is_valid(user_input , max_num):
         user_number = int(user_input)
         if user_number >= 1 and user_number <= max_num:
             return True
-        else:                
+        else:
             return False
     else:
         return False

@@ -17,10 +17,15 @@ def update_user_word(secret_word, user_word, char):
         else:
             new_user_word += user_word[i]
     return new_user_word
+def get_user_word(secret_word):
+    new_word = ''
+    for i in range(len(secret_word)):
+        new_word += '*'
+    return new_word
 def start():
     attemps = 0
     secret_word = 'троллейбус'
-    user_word = '**********'
+    user_word = get_user_word(secret_word)
     user_chars = ''
     question = 'Безрельсовое механическое транспортное средство, что это?'
     print('Вопрос: ',question)
