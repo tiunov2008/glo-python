@@ -24,6 +24,11 @@ class Storage:
         file = open(path, 'w')
         file.write('')
         file.close()
+
+    def write(self, path, data):
+        file = open(path, 'w')
+        file.write(data)
+        file.close()
     
     def exists(self, path):
         return os.path.exists(path)
@@ -110,6 +115,8 @@ class UsersResultStorage:
         self.file_name = 'db.json'
         self.results = []
     def get_results(self):
+        if not storage.exists(self.file_name):
+            storage.write(self.file_name, '[]')
         data = storage.get(self.file_name)
         self.results = jsonpickle.decode(data)
         return self.results
