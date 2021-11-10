@@ -14,7 +14,7 @@ class Storage:
         file.write(user_data)
         file.close()
 
-bd = Storage()w
+bd = Storage()
 bd.write('')
 bd.append('123')
 bd.append('456')
