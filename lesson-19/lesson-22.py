@@ -2,6 +2,39 @@ import random
 import jsonpickle
 import os
 
+def ask_question(question, rule):
+    if rule == 'Да/Нет':
+        while True:
+            print(f'{question}, Нажмите Да или Нет')
+            answer = input().lower().strip()
+            if answer == 'да':
+                return True
+            elif answer == 'нет':
+                return False
+            else:
+                print('Что-то пошло не так: ', end='')
+    else:
+        print(question)
+        answer = input().strip()
+        while True:
+            if rule == 'digit':
+                if not answer.isdigit():
+                    print('Пожалуйста, введите число!')
+                    answer = input().strip()
+                else:
+                    answer = int(answer)
+                    break
+            if rule == 'question':
+                if answer[-1] != '?':
+                    print('Пожалуйста, введите "?" в конце!')
+                    answer = input().strip()
+                elif len(answer) < 10:
+                    print('Длина вопроса должна быть больше 10 символов!')
+                    answer = input().strip()
+                else:
+                    break
+        return answer
+
 
 class Storage:
     def get(self, path):
@@ -60,31 +93,30 @@ class QuestionsStorage:
         self.questions = jsonpickle.decode(data)
         return self.questions
     def add_question(self):
-        print('Введите вопрос')
-        question = input()
-        print('Введите ответ')
-        answer = input()
-        while True:
-            if not answer.isdigit():
-                print('Пожалуйста, введите число!')
-                answer = input()
-            else:
-                answer = int(answer)
-                break
+        question = ask_question('Введите вопрос', 'question')
+        answer = ask_question('Введите ответ', 'digit')
         self.get_questions()
         self.questions.append(Question(question, answer))
         self.update_question()
+        if ask_question('Хотите добавить ещё вопрос?', 'Да/Нет'):
+            self.add_question()
     def remove_question(self):
         self.get_questions()
         while True:
-            print('Введите номер вопроса')
-            print('\n')
+            print('----------------------------')
             for i in range(len(self.questions)):
                 print(i + 1, self.questions[i].text)
-            question = int(input())
-            if 0 > question > len(self.questions):
-                continue
-            self.questions.pop(question - 1)
+            print('----------------------------')
+            print('Введите номера вопросов через пробел')
+            questions = input().split(' ')
+            print(sorted(questions, reverse=True))
+            del_counter = 1
+            for question in sorted(questions, reverse=True):
+                question = int(question)
+                if question < 0 or question > len(self.questions):
+                    continue
+                del self.questions[question - del_counter]
+                del_counter +=1
             self.update_question()
             break
     def update_question(self):
@@ -95,15 +127,7 @@ class QuestionsStorage:
         count_right_answers = 0
         for i in range(len(self.questions)):
             question_index = random.randint(0,len(self.questions) - 1)
-            print('№', i + 1, self.questions[question_index].text)
-            user_answer = input()
-            while True:
-                if not user_answer.isdigit():
-                    print('Пожалуйста, введите число!')
-                    user_answer = input()
-                else:
-                    user_answer = int(user_answer)
-                    break
+            user_answer = ask_question('№ ' + str((i + 1)) + ' ' + self.questions[question_index].text, 'digit')
             right_answer = self.questions[question_index].answer
             if user_answer == right_answer:
                 count_right_answers += 1
@@ -145,17 +169,7 @@ class User:
         return self.result
     
 
-#Функция которая задает вопрос
-def ask_question(question):
-    print(f'{question}, Нажмите Да или Нет')
-    answer = input().lower().strip()
-    if answer == 'да':
-        return True
-    elif answer == 'нет':
-        return False
-    else:
-        print('Что-то пошло не так')
-        return ask_question(question)
+
 #Функция начала теста
 def start_test():
     print('Как вас зовут?')
@@ -172,11 +186,11 @@ def start_test():
     users.show_results()
 
 
-    if ask_question('Хотите добавить вопрос?'):
+    if ask_question('Хотите добавить вопрос?', 'Да/Нет'):
         Questions.add_question()
-    if ask_question('Хотите удалить вопрос?'):
+    if ask_question('Хотите удалить вопрос?', 'Да/Нет'):
         Questions.remove_question()
-    if ask_question('Хотите пройти тест еще раз?'):
+    if ask_question('Хотите пройти тест еще раз?', 'Да/Нет'):
         start_test()
 
 #Запуск теста
