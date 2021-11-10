@@ -32,7 +32,7 @@ class QuestionsStorage:
     def get_questions(self):
         self.questions = []
         if not os.path.exists('question_db.txt'):
-            self.questions = [ 
+            self.questions = [  
                 Question('Сколько будет два делить на два умноженное на два?', 2),
                 Question('Бревно нужно распилить на 10 частей, сколько надо сделать распилов?', 9),
                 Question('На двух руках 10 пальцев. Сколько пальцев на 5 руках?', 25),
