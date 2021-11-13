@@ -11,11 +11,17 @@ class Ball:
         self.center_y = 100
         self.radius = 30
 
-        self.vx = random.randint(-3, 3)
-        self.vy = random.randint(-3, 3)
+        self.vx = self.get_speed()
+        self.vy = self.get_speed()
 
     def show(self):
         pygame.draw.circle(display, self.color, (self.center_x, self.center_y), self.radius)
+
+    def get_speed(self):
+        speed = random.randint(-3, 3)
+        while speed == 0:
+            speed = random.randint(-3, 3)
+        return speed
 
     def go(self):
         self.center_x += self.vx
@@ -41,7 +47,7 @@ class Ball:
         return counter
     
     def check_ball(self):
-        if self.center_x == width or self.center_x == 0 or self.center_y == height or self.center_y == 0:
+        if self.center_x >= width or self.center_x <= 0 or self.center_y >= height or self.center_y <= 0:
             return False
         else:
             return True
@@ -83,10 +89,10 @@ while True:
                 ball.stop()
             red = (255,0, 0)
             white = (255, 255, 255)
-            fontObj = pygame.font.Font('freesansbold.ttf', 50)
+            fontObj = pygame.font.Font('freesansbold.ttf', 20)
             textSurfaceObj = fontObj.render('Ваш счет: ' + str(ball.count_balls(balls)), True, red, white)
             textRectObj = textSurfaceObj.get_rect()
-            textRectObj.center = (width, 0)
+            textRectObj.topright = (width, 0)
             display.blit(textSurfaceObj, textRectObj)
     for ball in balls:
         ball.move()
