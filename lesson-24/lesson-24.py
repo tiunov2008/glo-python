@@ -57,29 +57,30 @@ class BillayrdBall(Ball):
     def __init__(self, display):
         super().__init__(display)
         self.color = pygame.Color('green')
-        
     def go(self):
         super().go()
         width, height = self.display.get_size()
         if self.center_x <= self.radius:
             self.vx = -self.vx
-            return 0
+            walls[0] += 1
         if self.center_x >= width - self.radius:
             self.vx = -self.vx
-            return 1
+            walls[1] += 1
 
         if self.center_y <= self.radius:
             self.vy = -self.vy
-            return 2
+            walls[2] += 1
+
 
         if self.center_y >= height - self.radius:
             self.vy = -self.vy
-            return 3
+            walls[3] += 1
+
 
 
 
 pygame.init()
-
+walls = [0, 0, 0, 0]
 width = 700
 height = 400
 display = pygame.display.set_mode((width, height))
@@ -107,5 +108,10 @@ while True:
             
     for ball in balls:
         ball.move()
+        print(walls[0])
+        textSurfaceObj = fontObj.render(str(walls[0]), True, red, white)
+        textRectObj = textSurfaceObj.get_rect()
+        textRectObj.topright = (width, 0)
+        display.blit(textSurfaceObj, textRectObj)
     pygame.display.flip()
     clock.tick(60)
