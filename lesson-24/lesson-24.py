@@ -77,6 +77,19 @@ class BillayrdBall(Ball):
             walls[3] += 1
 
 
+def write_text(wall, id):
+    fontObj = pygame.font.Font('freesansbold.ttf', 20)
+    textSurfaceObj = fontObj.render(str(wall), True, red, white)
+    textRectObj = textSurfaceObj.get_rect()
+    if id == 0:
+        textRectObj.bottomright = (15, height // 2)
+    elif id == 1:
+        textRectObj.bottomright = (width, height  // 2)
+    elif id == 2:
+        textRectObj.bottomright = (width // 2, 20)
+    elif id == 3:
+        textRectObj.bottomright = (width // 2, height)
+    display.blit(textSurfaceObj, textRectObj)
 
 
 pygame.init()
@@ -98,7 +111,6 @@ time.sleep(2)
 clock = pygame.time.Clock()
 red = (255,0, 0)
 white = (255, 255, 255)
-fontObj = pygame.font.Font('freesansbold.ttf', 20)
 
 while True:
     event_list = pygame.event.get()
@@ -108,10 +120,8 @@ while True:
             
     for ball in balls:
         ball.move()
-        print(walls[0])
-        textSurfaceObj = fontObj.render(str(walls[0]), True, red, white)
-        textRectObj = textSurfaceObj.get_rect()
-        textRectObj.topright = (width, 0)
-        display.blit(textSurfaceObj, textRectObj)
+    for i in range(len(walls)):
+        write_text(walls[i], i)
+
     pygame.display.flip()
     clock.tick(60)
