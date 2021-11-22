@@ -8,4 +8,4 @@ url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&APPID={apikey}&
 
 r = requests.get(url)
 
-print(r.json()['main']['temp'])
+print(f'Сейчас температура в Москве {r.json()["main"]["temp"]} градусов')
