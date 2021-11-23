@@ -23,6 +23,36 @@ def ask_question(question, rule):
                 else:
                     answer = int(answer)
                     break
+            if rule == 'age':
+                if not answer.isdigit():
+                    print('Пожалуйста, введите число!')
+                    answer = input().strip()
+                elif (int(answer) <= 0 or int(answer) >= 21):
+                    print('Пожалуйста, введите число больше 0 и меньше 21!')
+                    answer = input().strip()
+                else:
+                    answer = int(answer)
+                    break
+            if rule == 'class':
+                if not answer.isdigit():
+                    print('Пожалуйста, введите число!')
+                    answer = input().strip()
+                elif (int(answer) <= 0 or int(answer) >= 12):
+                    print('Пожалуйста, введите число больше 0 и меньше 12!')
+                    answer = input().strip()
+                else:
+                    answer = int(answer)
+                    break
+            if rule == 'question':
+                if not answer.isdigit():
+                    print('Пожалуйста, введите число!')
+                    answer = input().strip()
+                elif (int(answer) <= 0 or int(answer) >= 6):
+                    print('Пожалуйста, введите число больше 0 и меньше 7!')
+                    answer = input().strip()
+                else:
+                    answer = int(answer)
+                    break
             if rule == 'FIO':
                 if answer.count(' ') != 2:
                     print('Пожалуйста, введите ФИО через пробелы')
@@ -128,8 +158,8 @@ class StudentsStorage:
 
     def add_student(self):
         student = ask_question('Введите ФИО', 'FIO')
-        age = ask_question('Введите возраст', 'digit')
-        school_class = ask_question('Введите класс', 'digit')
+        age = ask_question('Введите возраст', 'age')
+        school_class = ask_question('Введите класс', 'class')
         self.get_students()
         self.students.append(Student(student, age, school_class))
         self.update_students()
@@ -139,7 +169,7 @@ class StudentsStorage:
         for i in range(len(self.students)):
             print(i + 1, self.students[i].FIO)
         print('----------------------------')
-        student = ask_question('Введите номер ученика', 'digit')
+        student = ask_question('Введите номер ученика', 'digit') - 1
         while student >= len(self.students) or student <= 0:
             student = ask_question('Введите номер ученика', 'digit')
         self.students.pop(student - 1)
@@ -163,17 +193,27 @@ def start_school():
     Students.get_students()
     school = SchoolStorage(len(Students.students))
     school.get_info()
-
-    if ask_question('Хотите получить информацию о школе?', 'Да/Нет'):
+    questions = [
+        'Хотите получить информацию о школе?',
+        'Хотите изменить информацию о школе?',
+        'Хотите просмотреть учеников этой школы?',
+        'Хотите добавить ученика?',
+        'Хотите удалить ученика?',
+    ]
+    for i in range(len(questions)):
+        print(i + 1, questions[i])
+    result = ask_question('Выберите вариант', 'question') - 1 
+    if result == 0:
         school.show_info()
-    if ask_question('Хотите изменить информацию о школе?', 'Да/Нет'):
+    elif result == 1:
         school.change_info()
-    if ask_question('Хотите просмотреть учеников этой школы?', 'Да/Нет'):
+    elif result == 2:
         Students.show_students()
-    if ask_question('Хотите добавить ученика?', 'Да/Нет'):
+    elif result == 3:
         Students.add_student()
-    if ask_question('Хотите удалить ученика?', 'Да/Нет'):
+    elif result == 4:
         Students.remove_student()
+        
     if ask_question('Еще раз?', 'Да/Нет'):
         start_school()
 
